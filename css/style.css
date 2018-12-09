@@ -1,0 +1,110 @@
+body{
+	background-image: url("Img/back1.jpg");
+	width: 840px;
+	margin: 0 auto;
+}
+#form_mini{
+	height: 250px;
+	width: 210px;
+	display: inline-block;
+	background-color: white;
+	border-color: #C8E0DE; 
+	text-align: center;
+	border-style: solid; 
+	border-width: 5px;	
+}
+
+#fl{
+	float: right;
+}
+
+p.index_name{
+	margin-top: 5px;
+	height: 20px;
+	margin: 0 auto;
+
+}
+img.index_photo{
+	margin-top: 0;
+	height: 200px;
+	width: 200px;
+	margin-left: 2%;
+}
+
+
+#full_form{
+	width: 400px;
+	display: inline-block;
+
+}
+img.form_main_photo{
+	width: 400px;
+
+}
+#photo_previevs{
+	width: 400px;
+	display: inline-block;
+	float: right;
+	
+}
+#big_photo{
+	z-index: 5;
+	position: absolute;
+	margin-left: 440px;
+	margin-top: 50px;
+}
+img.big_photo{
+	width: 400px;
+}
+
+#comments{
+	width: 840px;
+	position: relative;
+}
+p.comment{
+	height: 20px;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+img.comment{
+	margin-top: 0;
+}
+
+footer{
+	margin-top: 20px;
+}
+
+textarea.aboutme{
+	width: 810px;
+	height: 160px;
+	resize: none;
+}
+textarea.comment{
+	width: 833px;
+	height: 160px;
+	resize: none;
+}
+
+b.name{
+	color: red;
+}
+
+#new{
+	margin: 0 auto;
+	display: block;
+	width: 397px;
+}
+
+#tpriv{
+	background-color: white;
+	text-align: center;
+	font-family: Gentium Book Basic Italic, 'Comic Sans MS';
+	font-size: 16pt;
+	color: #5152B3;
+	border-color: #C8E0DE; 
+	border-style: solid; 
+	border-width: 5px;
+
+	
+}
