@@ -2,15 +2,14 @@
 	session_start ();
 	if (isset($_GET['id'])) {$id = $_GET['id'];}
 	require '../connection.php';
-	$result = mysql_query('select fio, birth, kind_of_sport, faculty, level, achievements, phone, email from forms where id =' . $id);
-	$form = mysql_fetch_array($result);
-	//print_r($form);
+	$result = mysql_query('select fio, birth, kind_of_sport, faculty, level, achievements, phone, email from profiles where id =' . $id);
+	$profile = mysql_fetch_array($result);
 ?>
 <!DOCTYPE html>
 <html>
 <head meta charset="utf8">
 	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
-	<title><?php printf($form["fio"]); ?>, редактирование анкеты</title>
+	<title><?php printf($profile["fio"]); ?>, редактирование анкеты</title>
 	<script type = "text/javascript" src = "http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	</head>
 	<body>
@@ -20,44 +19,44 @@
 					<a href="../index.php"><img class="responsive-img" src="../img/logo.png"></a>
 				</div>
 			</header>
-			<div class="edit_form">
+			<div class="edit_profile">
 				<div class="row">
 					<div class="col m12 center-align">
-						<img height="300px" src = <?php printf('"../img/forms/%s"', $id);?> >
+						<img height="300px" src = <?php printf('"../get_image.php?id=%s"', $id);?> >
 					</div>
 				</div>
 				<form action="update.php" method="POST">
 					<div class="row">
 						<div class="input-field col s6 offset-s3">
-				          <input id="fio" type="text" class="validate" maxlength = "50" required name="fio" value = <?php print($form["fio"]);?>>
+				          <input id="fio" type="text" class="validate" maxlength = "50" required name="fio" value = <?php print($profile["fio"]);?>>
 				          <label for="fio">ФИО</label>
 				        </div>
 				        <div class="input-field col s6 offset-s3">
-				          <input id="birth" type="text" class="validate" maxlength = "10" pattern="^\d{1,2}\.\d{1,2}\.\d{4}$" name="birth" required value =<?php printf("%s", $form["birth"]); ?>>
+				          <input id="birth" type="text" class="validate" maxlength = "10" pattern="^\d{1,2}\.\d{1,2}\.\d{4}$" name="birth" required value =<?php printf("%s", $profile["birth"]); ?>>
 				          <label for="birth">Дата рождения</label>
 				        </div>
 				        <div class="input-field col s6 offset-s3">
-				          <input id="kind_of_sport" type="text" class="validate" maxlength = "50" name="kind_of_sport" required value =<?php printf("%s", $form["kind_of_sport"]); ?>>
+				          <input id="kind_of_sport" type="text" class="validate" maxlength = "50" name="kind_of_sport" required value =<?php printf("%s", $profile["kind_of_sport"]); ?>>
 				          <label for="kind_of_sport">Вид спорта</label>
 				        </div>
 				        <div class="input-field col s6 offset-s3">
-				          <input id="faculty" type="text" class="validate" maxlength = "30" name="faculty" required value =<?php printf("%s", $form["faculty"]); ?>>
+				          <input id="faculty" type="text" class="validate" maxlength = "30" name="faculty" required value =<?php printf("%s", $profile["faculty"]); ?>>
 				          <label for="faculty">Факультет</label>
 				        </div>
 				        <div class="input-field col s6 offset-s3">
-				          <input id="level" type="text" class="validate" maxlength = "30" name="level" required value =<?php printf("%s", $form["level"]); ?>>
+				          <input id="level" type="text" class="validate" maxlength = "30" name="level" required value =<?php printf("%s", $profile["level"]); ?>>
 				          <label for="level">Разряд в спорте</label>
 				        </div>
 				        <div class="input-field col s6 offset-s3">
-				          <input id="phone" type="text" class="validate" maxlength = "11" name="phone" required value =<?php printf("%s", $form["phone"]); ?>>
+				          <input id="phone" type="text" class="validate" maxlength = "11" name="phone" required value =<?php printf("%s", $profile["phone"]); ?>>
 				          <label for="phone">Телефон</label>
 				        </div>
 				        <div class="input-field col s6 offset-s3">
-				          <input id="email" type="text" class="validate" maxlength = "30" name="email" required value =<?php printf("%s", $form["email"]); ?>>
+				          <input id="email" type="text" class="validate" maxlength = "30" name="email" required value =<?php printf("%s", $profile["email"]); ?>>
 				          <label for="email">Email</label>
 				        </div>
 				        <div class="input-field col s6 offset-s3">
-				          <textarea id="achievements" class="materialize-textarea" type="text" class="validate" maxlength = "500" name="achievements" required><?php printf("%s", $form["achievements"]);?></textarea>
+				          <textarea id="achievements" class="materialize-textarea" type="text" class="validate" maxlength = "500" name="achievements" required><?php printf("%s", $profile["achievements"]);?></textarea>
 				          <label for="achievements">Достижения в спорте</label>
 				        </div>
 				        <input type = "hidden" maxlength = "30" value = <?php printf('%s', $id);?> name = "id">
@@ -105,7 +104,7 @@
 				<h4>Комментарии</h4>
 				<?php 
 				
-					$query = "select NICK_NAME, COMMENT, COMMENT_ID from comments where FORM_ID= " . $id; // тянем из базы комменты
+					$query = "select NICK_NAME, COMMENT, COMMENT_ID from comments where profile_id= " . $id; // тянем из базы комменты
 					$comments = mysql_query($query);
 
 					while ($com = mysql_fetch_array($comments)) // и рисуем
@@ -117,7 +116,7 @@
 								
 								printf('<h5>%s</h5>
 												<p>%s</p>',$com["NICK_NAME"], $com["COMMENT"]);
-								printf("<div class='right-align'><a href='removecomment.php?id=%s&form=%s'>Удалить</a></div>", $com["COMMENT_ID"], $id);
+								printf("<div class='right-align'><a href='removecomment.php?id=%s&profile=%s'>Удалить</a></div>", $com["COMMENT_ID"], $id);
 						echo '</div>';
 
 					}

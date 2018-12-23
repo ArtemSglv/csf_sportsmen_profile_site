@@ -1,7 +1,7 @@
 <?php
 	session_start();
   	require 'connection.php';
-	$result = mysql_query("select * from forms") or die(mysql_error());
+	$result = mysql_query("select * from profiles") or die(mysql_error());
 ?>
 <html>
 	<head meta charset="utf8">
@@ -36,20 +36,20 @@
 			<div class="cards">
 				<div class="row">
 					<?php
-						while ($forms = mysql_fetch_array($result)){
+						while ($profiles = mysql_fetch_array($result)){
 									printf('
 												    <div class="col s12 m4">
 												      <div class="card">
 												        <div class="card-image">
-												          <img height = "200px" width = "200px" src="img/forms/%s">
+												          <img height = "200px" width = "200px" src="get_image.php?id=%s">
 												          <span class="card-title">%s</span>
 												        </div>
 												        <div class="card-action">
-												          <a href="show.php?id=%s">Просмотр</a>', $forms["id"], $forms["fio"], $forms["id"]);
+												          <a href="show.php?id=%s">Просмотр</a>', $profiles["id"], $profiles["fio"], $profiles["id"]);
 											if(isset($_SESSION['user'])) {
 												if($_SESSION['user']=='ADMIN'){
-										        	printf('<a href="admin/edit.php?id=%s">Изменить</a>', $forms['id']);
-										        	printf('<a href="admin/remove.php?id=%s">Удалить</a>', $forms['id']);
+										        	printf('<a href="admin/edit.php?id=%s">Изменить</a>', $profiles['id']);
+										        	printf('<a href="admin/remove.php?id=%s">Удалить</a>', $profiles['id']);
 												}
 										    }
 											    echo '</div>

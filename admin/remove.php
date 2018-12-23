@@ -1,7 +1,7 @@
 <?php
 	if (isset($_GET['id'])) {$id = $_GET['id'];}
 require '../connection.php';
-	$query = 'delete from forms where id = "' . $id . '";';
+	$query = 'delete from profiles where id = "' . $id . '";';
 	//print($query);
 	$result = mysql_query($query);
 	if ($result) 

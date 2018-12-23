@@ -28,7 +28,7 @@
 					<h3>Введите логин и пароль, чтобы войти как администратор!</h3>
 				</div>
 			</header>
-			<div class="create_form">
+			<div class="login">
 				<form action="login.php" method="POST" enctype="multipart/form-data">
 					<div class="row">
 						<div class="input-field col s6 offset-s3">

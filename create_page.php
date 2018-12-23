@@ -1,6 +1,9 @@
-
+<?php
+	header('Content-Type: text/html; charset: utf8');
+?>
 <html>
-	<head meta charset="utf-8">
+	<head meta charset="utf8">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 	<title>Создание анкеты</title>
 	</head>
@@ -11,7 +14,7 @@
 					<a href="index.php"><img class="responsive-img" src="img/logo.png"></a>
 				</div>
 			</header>
-			<div class="create_form">
+			<div class="create_profile">
 				<form action="create.php" method="POST" enctype="multipart/form-data">
 					<div class="row">
 						<div class="input-field col s6 offset-s3">
@@ -43,14 +46,14 @@
 				          <label for="email">Email</label>
 				        </div>
 				        <div class="input-field col s6 offset-s3">
-				          <textarea id="achievements" class="materialize-textarea" type="text" class="validate" maxlength = "500" name="achievements" required></textarea>
+				          <textarea id="achievements" class="materialize-textarea" type="text" class="validate" maxlength = "500" name="achievements"></textarea>
 				          <label for="achievements">Достижения в спорте</label>
 				        </div>
 				        <div class="col s6 offset-s3">
 						    <div class="file-field input-field">
 						      <div class="btn">
 						        <span>Фото</span>
-						        <input type="file" name="upload_file">
+						        <input type="file" name="upload_image" accept="image/*" id="f" data-max-size="65356">
 						      </div>
 						      <div class="file-path-wrapper">
 						        <input class="file-path validate" type="text" name="file_path">
@@ -72,4 +75,22 @@
 		</div>
 		<script type="text/javascript" src="js/materialize.min.js"></script>
 	</body>
+	<script>
+	$(function(){
+	    $('form').submit(function(){
+	        var isOk = true;
+	        $('input[type=file][data-max-size]').each(function(){
+	            if(typeof this.files[0] !== 'undefined'){
+	                var maxSize = parseInt($(this).attr('data-max-size'),10),
+	                size = this.files[0].size;
+	                isOk = maxSize > size;
+	                if(!isOk)
+	                	alert("Выбран слишком большой файл! Ограничение: 65КБ");
+	                return isOk;
+	            }
+	        });
+	        return isOk;
+	    });
+	});
+</script> 
 </html>

@@ -13,15 +13,15 @@
 		if (isset($_POST['achievements'])) {$achievements = $_POST['achievements'];}
 
 		require 'connection.php';
-			$query = 'insert into forms (fio, kind_of_sport, birth, level, faculty, phone, email, achievements ) values ("' . $fio . '", "' . $kind_of_sport . '", "' . $birth . '", "' . $level . '", "' . $faculty . '", "' . $phone . '", "' . $email . '", "' . $achievements .'")' ;
+
+		if(is_uploaded_file($_FILES['upload_image']['tmp_name'])){
+			// Читаем содержимое файла
+		    $image = file_get_contents( $_FILES['upload_image']['tmp_name'] );
+		    // Экранируем специальные символы в содержимом файла
+		    $image = mysql_escape_string( $image );
+
+			$query = 'insert into profiles (fio, kind_of_sport, birth, level, faculty, phone, email, achievements, img) values ("' . $fio . '", "' . $kind_of_sport . '", "' . $birth . '", "' . $level . '", "' . $faculty . '", "' . $phone . '", "' . $email . '", "' . $achievements .'","'.$image.'")' ;
 			mysql_query($query);
-
-
-		//копирование фотографий
-		$id = mysql_insert_id();
-
-		if(is_uploaded_file($_FILES['upload_file']['tmp_name'])){
-		    	move_uploaded_file($_FILES['upload_file']['tmp_name'], "img/forms/" .  $id);
 		}
 
 		echo '<script type="text/javascript">alert("Анкета создана!");</script>';

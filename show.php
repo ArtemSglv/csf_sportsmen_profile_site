@@ -3,13 +3,13 @@
 	//$_SESSION['user']='USER';
 	if (isset($_GET['id'])) {$id = $_GET['id'];}
 	require 'connection.php';
-	$result = mysql_query('select fio, birth, kind_of_sport, faculty, level, achievements, phone, email FROM forms where id =' . $id);
-	$form = mysql_fetch_array($result);
+	$result = mysql_query('select fio, birth, kind_of_sport, faculty, level, achievements, phone, email FROM profiles where id =' . $id);
+	$profile = mysql_fetch_array($result);
 ?>
 <html>
 	<head meta charset="utf8">
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-	<title><?php printf($form["fio"]) ?></title>
+	<title><?php printf($profile["fio"]) ?></title>
 	<script type = "text/javascript" src = "http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	</head>
 	<body>
@@ -19,22 +19,22 @@
 						<a href="index.php"><img class="responsive-img" src="img/logo.png"></a>
 					</div>
 			</header>
-			<div class="show_form">
+			<div class="show_profile">
 				<?php
 					if (isset($_SESSION['user']))
 						if ($_SESSION['user']=='ADMIN')
 							printf("<a href = 'admin/edit.php?id=%s'>Редактировать</a>", $id);
 				?>
 			<ul class="collection">
-		      <li class="collection-item"><img height= "300px" src = <?php printf('"img/forms/%s"', $id);?> ></li>
-		      <li class="collection-item">Имя: <?php printf('%s', $form["fio"]);?></li>
-		      <li class="collection-item">Дата рождения: <?php printf('%s', $form["birth"]);?></li>
-		      <li class="collection-item">Вид спорта: <?php printf('%s', $form["kind_of_sport"]);?></li>
-		      <li class="collection-item">Факультет: <?php printf('%s', $form["faculty"]);?></li>
-		      <li class="collection-item">Разряд в спорте: <?php printf('%s', $form["level"]);?></li>
-		      <li class="collection-item">Телефон: <?php printf('%s', $form["phone"]);?></li>
-		      <li class="collection-item">Почта: <?php printf('%s', $form["email"]);?></li>
-		      <li class="collection-item">Достижения в спорте: <?php printf('%s', $form["achievements"]);?></li>
+		      <li class="collection-item"><img height= "300px" src = <?php printf('"get_image.php?id=%s"', $id);?> ></li>
+		      <li class="collection-item">Имя: <?php printf('%s', $profile["fio"]);?></li>
+		      <li class="collection-item">Дата рождения: <?php printf('%s', $profile["birth"]);?></li>
+		      <li class="collection-item">Вид спорта: <?php printf('%s', $profile["kind_of_sport"]);?></li>
+		      <li class="collection-item">Факультет: <?php printf('%s', $profile["faculty"]);?></li>
+		      <li class="collection-item">Разряд в спорте: <?php printf('%s', $profile["level"]);?></li>
+		      <li class="collection-item">Телефон: <?php printf('%s', $profile["phone"]);?></li>
+		      <li class="collection-item">Почта: <?php printf('%s', $profile["email"]);?></li>
+		      <li class="collection-item">Достижения в спорте: <?php printf('%s', $profile["achievements"]);?></li>
 		    </ul>			
 			</div>
 			<div class="comments">
@@ -75,7 +75,7 @@
 			<div class="early_comments row">
 				<h4>Комментарии</h4>
 				<?php				
-					$query = "select NICK_NAME, COMMENT, COMMENT_ID from comments where FORM_ID= " . $id; // тянем из базы комменты
+					$query = "select NICK_NAME, COMMENT, COMMENT_ID from comments where profile_id= " . $id; // тянем из базы комменты
 					$comments = mysql_query($query);
 
 					while ($com = mysql_fetch_array($comments)) // и рисуем
