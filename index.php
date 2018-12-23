@@ -1,6 +1,6 @@
 <?php
 	session_start();
-  require 'connection.php';
+  	require 'connection.php';
 	$result = mysql_query("select * from forms") or die(mysql_error());
 ?>
 <html>
@@ -12,14 +12,14 @@
 		<div class="container">
 			<header class="row">
 				<div class="col m12 center-align">
-					<a href="index.php"><img class="responsive-img" src="img/header.png"></a>
+					<a href="index.php"><img class="responsive-img" src="img/logo.png"></a>
 					<h3>Добро пожаловать на сайт для спортсменов ВГУ!</h3>
 					<p>На этом сайте спортсмены могут оставлять информацию о себе, в том числе о своих достижениях, а также просматривать успехи других спортсменов.</p>
 				</div>
 			</header>
 			<div class="btns row">
 				<div class="create_new col s3 offset-s2">
-					<a class="waves-effect waves-light btn" href="create.php">Создать новую анкету</a>
+					<a class="waves-effect waves-light btn" href="create_page.php">Создать новую анкету</a>
 				</div>
 				<div class="col s2"></div>
 				<div class="admin_login col s3">
@@ -47,9 +47,11 @@
 												        <div class="card-action">
 												          <a href="show.php?id=%s">Просмотр</a>', $forms["id"], $forms["fio"], $forms["id"]);
 											if(isset($_SESSION['user'])) {
-												if($_SESSION['user']=='ADMIN')
-								          printf('<a href="admin/edit.php?id=%s">Изменить</a>', $forms['id']);
-								      }
+												if($_SESSION['user']=='ADMIN'){
+										        	printf('<a href="admin/edit.php?id=%s">Изменить</a>', $forms['id']);
+										        	printf('<a href="admin/remove.php?id=%s">Удалить</a>', $forms['id']);
+												}
+										    }
 											    echo '</div>
 												      </div>
 												    </div>';

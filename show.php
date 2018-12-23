@@ -16,7 +16,7 @@
 		<div class="container">
 			<header class="row">
 					<div class="col m12 center-align">
-						<a href="index.php"><img class="responsive-img" src="img/header.png"></a>
+						<a href="index.php"><img class="responsive-img" src="img/logo.png"></a>
 					</div>
 			</header>
 			<div class="show_form">
@@ -25,8 +25,8 @@
 						if ($_SESSION['user']=='ADMIN')
 							printf("<a href = 'admin/edit.php?id=%s'>Редактировать</a>", $id);
 				?>
-				<ul class="collection">
-		      <li class="collection-item"><img src = <?php printf('"img/forms/%s"', $id);?> ></li>
+			<ul class="collection">
+		      <li class="collection-item"><img height= "300px" src = <?php printf('"img/forms/%s"', $id);?> ></li>
 		      <li class="collection-item">Имя: <?php printf('%s', $form["fio"]);?></li>
 		      <li class="collection-item">Дата рождения: <?php printf('%s', $form["birth"]);?></li>
 		      <li class="collection-item">Вид спорта: <?php printf('%s', $form["kind_of_sport"]);?></li>

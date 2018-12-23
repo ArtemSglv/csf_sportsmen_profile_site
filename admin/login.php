@@ -24,7 +24,7 @@
 		<div class="container">
 			<header class="row">
 				<div class="col m12 center-align">
-					<a href="index.php"><img class="responsive-img" src="../img/header.png"></a>
+					<a href="index.php"><img class="responsive-img" src="../img/logo.png"></a>
 					<h3>Введите логин и пароль, чтобы войти как администратор!</h3>
 				</div>
 			</header>

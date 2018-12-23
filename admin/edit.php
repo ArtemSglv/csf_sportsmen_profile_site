@@ -17,13 +17,13 @@
 		<div class="container">
 			<header class="row">
 				<div class="col m12 center-align">
-					<a href="../index.php"><img class="responsive-img" src="../img/header.png"></a>
+					<a href="../index.php"><img class="responsive-img" src="../img/logo.png"></a>
 				</div>
 			</header>
 			<div class="edit_form">
 				<div class="row">
 					<div class="col m12 center-align">
-						<img src = <?php printf('"../img/forms/%s"', $id);?> >
+						<img height="300px" src = <?php printf('"../img/forms/%s"', $id);?> >
 					</div>
 				</div>
 				<form action="update.php" method="POST">
